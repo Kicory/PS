@@ -5,15 +5,31 @@ using namespace std;
 string data;
 
 string prob(string data);
+string prob_lin(string data, int& pos);
 
 int main(void){
 	int C;
 	cin >> C;
 	for(;C--;){
 		cin >> data;
-		cout << prob(data) << endl;
+		//pos is -1, like 'head' in linkedlist.
+		int pos = -1;
+		cout << prob_lin(data, pos) << endl;
 	}
 	return 0;
+}
+
+string prob_lin(string data, int& pos){
+    pos++;
+    if (data[pos] != 'x'){
+		return data.substr(pos, 1);
+    }
+	string Q[4];
+	Q[0] = prob_lin(data, pos);
+	Q[1] = prob_lin(data, pos);
+	Q[2] = prob_lin(data, pos);
+	Q[3] = prob_lin(data, pos);
+	return "x" + Q[2] + Q[3] + Q[0] + Q[1];
 }
 
 string prob(string data){
